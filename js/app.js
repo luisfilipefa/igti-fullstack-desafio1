@@ -7,18 +7,23 @@ let ageSum = 0;
 let ageAverage = 0;
 let form = null;
 let searchInput = null;
+let searchButton = null;
 let userSection = null;
 let statsSection = null;
 let usersContainer = null;
 let statsContainer = null;
 
 window.addEventListener("load", () => {
+  fetchData();
+
   form = document.querySelector("form");
   form.addEventListener("submit", (event) => event.preventDefault());
 
   searchInput = document.querySelector("#searchbar");
   searchbar.addEventListener("keyup", (event) => inputHandler(event));
-  fetchData();
+
+  searchButton = document.querySelector("#search-button");
+  searchButton.addEventListener("click", (event) => inputHandler(event));
 
   userSection = document.querySelector(".users-section");
   statsSection = document.querySelector(".stats-section");
@@ -98,10 +103,18 @@ const render = () => {
 };
 
 const inputHandler = (event) => {
-  const query = event.target.value;
+  if (event.target.id === "search-button") {
+    const query = event.target.previousElementSibling.value;
+    if (query) {
+      filterUsers(query);
+    }
+  }
 
-  if (event.key === "Enter") {
-    filterUsers(query);
+  if (event.target.id === "searchbar") {
+    const query = event.target.value;
+    if (event.key === "Enter" && query) {
+      filterUsers(query);
+    }
   }
 };
 

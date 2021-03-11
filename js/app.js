@@ -86,7 +86,9 @@ const render = () => {
     usersList += userItem;
   });
 
-  ageAverage = ageSum / usersFound.length;
+  if (usersFound.length > 0) {
+    ageAverage = ageSum / usersFound.length;
+  }
 
   let statsItem = `
     <li class="stats-item"><strong>Male:</strong>${totalMales}</li>

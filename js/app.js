@@ -1,10 +1,5 @@
 let allUsers = [];
 let usersFound = [];
-let usersFoundCounter = 0;
-let totalMales = 0;
-let totalFemales = 0;
-let ageSum = 0;
-let ageAverage = 0;
 let form = null;
 let searchInput = null;
 let searchButton = null;
@@ -48,9 +43,13 @@ const fetchData = async () => {
 };
 
 const render = () => {
-  usersFound.sort((a, b) => a.name.localeCompare(b.name));
+  let usersFoundCounter = usersFound.length;
+  let totalMales = 0;
+  let totalFemales = 0;
+  let ageSum = 0;
+  let ageAverage = 0;
 
-  usersFoundCounter = usersFound.length;
+  usersFound.sort((a, b) => a.name.localeCompare(b.name));
 
   let usersList = `
     <h2 class="section-title">${usersFoundCounter} user(s) found</h2>
@@ -77,9 +76,9 @@ const render = () => {
     let userItem = `
       <li class="user-item">
         <div class="img-container">
-          <img src="${picture}" />
+          <img src="${picture}"/>
         </div>
-        <span class="user-name">${name} | </span>
+        <span class="user-name">${name}</span>
         <span class="user-age">${age} years</span>
       </li>
     `;
@@ -90,10 +89,12 @@ const render = () => {
   ageAverage = ageSum / usersFound.length;
 
   let statsItem = `
-    <li class="stats-item">Male: ${totalMales}</li>
-    <li class="stats-item">Female: ${totalFemales}</li>
-    <li class="stats-item">Age sum: ${ageSum}</li>
-    <li class="stats-item">Age average: ${Math.floor(ageAverage)}</li>
+    <li class="stats-item"><strong>Male:</strong>${totalMales}</li>
+    <li class="stats-item"><strong>Female:</strong> ${totalFemales}</li>
+    <li class="stats-item"><strong>Age sum:</strong> ${ageSum}</li>
+    <li class="stats-item"><strong>Age average:</strong> ${Math.floor(
+      ageAverage
+    )}</li>
   `;
 
   statsList += statsItem;
